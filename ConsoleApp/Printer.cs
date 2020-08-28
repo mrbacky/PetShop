@@ -48,6 +48,7 @@ namespace PetShop.UI.ConsoleApp {
                         break;
                     case 3:
                         Console.WriteLine("case 2: Delete Pet");
+                        // comment
                         break;
                     case 4:
                         Console.WriteLine("Type id of pet your want to update: ");

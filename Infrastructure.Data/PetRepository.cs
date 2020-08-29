@@ -2,6 +2,7 @@
 using PetShop.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PetShop.Infrastructure.Static.Data {
     public class PetRepository : IPetRepositary {
@@ -44,6 +45,10 @@ namespace PetShop.Infrastructure.Static.Data {
 
         public void Delete(Pet pet) {
             _pets.Remove(pet);
+        }
+
+        public List<Pet> FilterPetByType(string type) {
+            return _pets.Where(x => x.Type == type).ToList();
         }
     }
 }

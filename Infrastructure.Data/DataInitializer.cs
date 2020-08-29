@@ -6,8 +6,7 @@ using System.Text;
 
 namespace PetShop.Infrastructure.Static.Data {
     public class DataInitializer {
-
-        IPetService _petService;
+        readonly IPetService _petService;
 
         public DataInitializer(IPetService petService) {
             _petService = petService;
@@ -23,7 +22,6 @@ namespace PetShop.Infrastructure.Static.Data {
                 Owner = "PetShopEsbjerg",
                 Price = 1842.65
             };
-
             _petService.Create(pet1);
 
             Pet pet2 = new Pet {
@@ -34,8 +32,19 @@ namespace PetShop.Infrastructure.Static.Data {
                 Owner = "PetShopEsbjerg",
                 Price = 1111,
             };
-
             _petService.Create(pet2);
+
+            Pet pet3 = new Pet {
+                Name = "Mikey",
+                Type = "Dog",
+                Birthdate = new DateTime(2020, 6, 7),
+                SoldDate = new DateTime(2020, 8, 1),
+                Owner = "PetShopEsbjerg",
+                Price = 333,
+            };
+            _petService.Create(pet3);
+
+
 
         }
 

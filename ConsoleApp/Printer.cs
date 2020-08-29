@@ -9,6 +9,7 @@ namespace PetShop.UI.ConsoleApp {
     public class Printer : IPrinter {
 
         IPetService _petService;
+        int petId;
 
 
         public Printer(IPetService petService) {
@@ -20,6 +21,7 @@ namespace PetShop.UI.ConsoleApp {
         public void StartUI() {
             string[] menuItems = {
                 "List All Pets",
+                "Search by type",
                 "Create Pet",
                 "Delete Pet",
                 "Update Pet",
@@ -27,65 +29,85 @@ namespace PetShop.UI.ConsoleApp {
             };
 
             var selection = ShowMenu(menuItems);
-            int petId;
-            while (selection != 5) {
+            while (selection != 6) {
                 switch (selection) {
-                    case 1://   LIST ALL
-                        var pets = _petService.ReadPets();
-                        foreach (var item in pets) {
-                            Console.WriteLine("id: " + item.Id + "\n"
-                                            + "name: " + item.Name + "\n"
-                                            + "type: " + item.Type + "\n"
-                                            + "birthday : " + item.Birthdate + "\n"
-                                            + "sold date : " + item.SoldDate + "\n"
-                                            + "previous owner : " + item.Owner + "\n"
-                                            + "price : " + item.Price + "\n"
-                                            );
-                        }
+                    case 1:
+                        ListAllPets();
                         break;
-                    case 2://   CREATE
-                        var pet = buildNewPet();
+                    case 2:
+                        SearchPetByType();
+                        break;
+                    case 3:
+                        var pet = BuildNewPet();
                         _petService.Create(pet);
                         break;
-                    case 3://   DELETE
-                        petId = GetPetIdFromUser();
-                        var petToDelete = _petService.FindPetById(petId);
-
-                        Console.WriteLine("Deleting {0}, type YES to confirm: ", petToDelete.Name);
-                        if (Console.ReadLine() == "YES") {
-                            _petService.Delete(petToDelete);
-                        }
-                        
+                    case 4://   DELETE
+                        DeletePet();
                         break;
-                    case 4://   UPDATE
+                    case 5://   UPDATE
                         petId = GetPetIdFromUser();
                         var petToUpdate = _petService.FindPetById(petId);
                         Console.WriteLine("Updating " + petToUpdate.Name);
-                        var newName = ReadUserData("name: ");
+                        var newName = ReadUserData("Name: ");
+                        var newType = ReadUserData("Type: ");
+                        Console.Write("Birth date:");
+                        DateTime newBirthday = GetDateFromUser();
+                        Console.Write("Sold date:");
+                        DateTime newSoldDate = GetDateFromUser();
+                        var newOwner = ReadUserData("Owner: ");
+                        Console.Write("Price: ");
+                        double newPrice = GetPriceFromUser();
+
                         //  asign new values to object
                         petToUpdate.Name = newName;
-                        /*var newBirthday = ReadUserData("Birthday: ");
-                        var newSoldDate = ReadUserData("Sold Date: ");
-                        var newType = ReadUserData("Type: ");
-                        var newOwner = ReadUserData("Owner: ");
-                        var newPrice = ReadUserData("Price: ");*/
+                        petToUpdate.Type = newType;
+                        petToUpdate.Birthdate = newBirthday;
+                        petToUpdate.SoldDate = newSoldDate;
+                        petToUpdate.Owner = newOwner;
+                        petToUpdate.Price = newPrice;
 
                         _petService.Update(petToUpdate);
-
-
-
                         break;
                 }
                 selection = ShowMenu(menuItems);
-                Console.WriteLine();
-                Console.WriteLine();
             }
 
             Console.WriteLine("Bye bye!");
             Console.ReadLine();
         }
 
-        private Pet buildNewPet() {
+        private void DeletePet() {
+            petId = GetPetIdFromUser();
+            var petToDelete = _petService.FindPetById(petId);
+            Console.WriteLine("Deleting {0}, type YES to confirm: ", petToDelete.Name);
+            if (Console.ReadLine() == "YES") {
+                _petService.Delete(petToDelete);
+            }
+        }
+
+        private void SearchPetByType() {
+            string type = Console.ReadLine();
+            List<Pet> filteredList = _petService.FilterPetByType(type);
+            foreach (var item in filteredList) {
+                Console.WriteLine(item.Name, item.Type);
+            }
+        }
+
+        private void ListAllPets() {
+            var pets = _petService.ReadPets();
+            foreach (var item in pets) {
+                Console.WriteLine("id: " + item.Id + "\n"
+                                + "name: " + item.Name + "\n"
+                                + "type: " + item.Type + "\n"
+                                + "birthday : " + item.Birthdate + "\n"
+                                + "sold date : " + item.SoldDate + "\n"
+                                + "previous owner : " + item.Owner + "\n"
+                                + "price : " + item.Price + "\n"
+                                );
+            }
+        }
+
+        private Pet BuildNewPet() {
             Console.WriteLine("Creating new Pet ");
             var name = ReadUserData("name: ");
             var type = ReadUserData("type: ");
@@ -108,7 +130,7 @@ namespace PetShop.UI.ConsoleApp {
         }
 
         DateTime GetDateFromUser() {
-          
+
             DateTime birthday;
             while (!DateTime.TryParse(Console.ReadLine(), out birthday)) {
                 Console.WriteLine("Please insert a correct date format -> e.g: 12/31/2020");
@@ -117,7 +139,7 @@ namespace PetShop.UI.ConsoleApp {
         }
 
         string ReadUserData(string text) {
-            Console.WriteLine(text);
+            Console.Write(text);
             return Console.ReadLine();
         }
 

@@ -19,6 +19,6 @@ namespace PetShop.Core.Entities {
         Pet Update(Pet pet);
 
         void Delete(Pet pet);
-
+        List<Pet> FilterPetByType(string type);
     }
 }

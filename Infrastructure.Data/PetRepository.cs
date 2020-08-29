@@ -18,7 +18,7 @@ namespace PetShop.Infrastructure.Static.Data {
         public List<Pet> ReadPets() {
             return _pets;
         }
-        //  another comment
+        
         public Pet ReadById(int id) {
             foreach (var pet in _pets) {
                 if (pet.Id == id) {
@@ -30,7 +30,6 @@ namespace PetShop.Infrastructure.Static.Data {
 
         public Pet UpdateInDB(Pet petToUpdate) {
             var petFromDB = this.ReadById(petToUpdate.Id);
-            
             if (petFromDB != null) {
                 petFromDB.Name = petToUpdate.Name;
                 /*petFromDB.PreviousOwner = petToUpdate.PreviousOwner;

@@ -21,6 +21,18 @@ namespace PetShop.Core.ApplicationService.Concrete {
             return _petRepo.ReadById(id);
         }
 
+        public Pet NewPet(string name, string type, DateTime birthday, DateTime soldDate, string owner, double price) {
+            var newPet = new Pet() {
+                Name = name,
+                Type = type,
+                Birthdate = birthday,
+                SoldDate = soldDate,
+                Owner = owner,
+                Price = price
+            };
+            return newPet;
+        }
+
         public List<Pet> ReadPets() {
             return _petRepo.ReadPets();
         }
@@ -34,7 +46,7 @@ namespace PetShop.Core.ApplicationService.Concrete {
             pet.Price = petToUpdate.Price;
             pet.SoldDate = petToUpdate.SoldDate;
             pet.Birthdate = petToUpdate.Birthdate;*/
-            
+
             return _petRepo.UpdateInDB(pet);
         }
     }

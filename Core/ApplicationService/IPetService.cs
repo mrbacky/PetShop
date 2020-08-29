@@ -12,6 +12,8 @@ namespace PetShop.Core.Entities {
 
         Pet FindPetById(int id);
 
+        Pet NewPet(string name, string type, DateTime birthday, DateTime soldDate, string owner, double price);
+
         Pet Create(Pet pet);
 
         Pet Update(Pet pet);

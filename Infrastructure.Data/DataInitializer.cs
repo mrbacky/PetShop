@@ -17,22 +17,22 @@ namespace PetShop.Infrastructure.Static.Data {
 
             Pet pet1 = new Pet {
                 Name = "Molly",
-                /*Type = "Cat",
+                Type = "Cat",
                 Birthdate = new DateTime(2020, 6, 7),
                 SoldDate = new DateTime(2020, 8, 1),
-                PreviousOwner = "PetShopEsbjerg",
-                Price = 1842.65*/
+                Owner = "PetShopEsbjerg",
+                Price = 1842.65
             };
 
             _petService.Create(pet1);
 
             Pet pet2 = new Pet {
                 Name = "Scooby",
-                /*Type = "Dog",
+                Type = "Dog",
                 Birthdate = new DateTime(2020, 6, 7),
                 SoldDate = new DateTime(2020, 8, 1),
-                PreviousOwner = "PetShopEsbjerg",
-                Price = 1111,*/
+                Owner = "PetShopEsbjerg",
+                Price = 1111,
             };
 
             _petService.Create(pet2);

@@ -18,7 +18,7 @@ namespace PetShop.Infrastructure.Static.Data {
         public List<Pet> ReadPets() {
             return _pets;
         }
-        
+
         public Pet ReadById(int id) {
             foreach (var pet in _pets) {
                 if (pet.Id == id) {
@@ -42,8 +42,8 @@ namespace PetShop.Infrastructure.Static.Data {
             return null;
         }
 
-
-
-
+        public void Delete(Pet pet) {
+            _pets.Remove(pet);
+        }
     }
 }

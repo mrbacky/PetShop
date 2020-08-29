@@ -18,5 +18,7 @@ namespace PetShop.Core.Entities {
 
         Pet Update(Pet pet);
 
+        void Delete(Pet pet);
+
     }
 }

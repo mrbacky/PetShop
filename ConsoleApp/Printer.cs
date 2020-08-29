@@ -27,7 +27,7 @@ namespace PetShop.UI.ConsoleApp {
             };
 
             var selection = ShowMenu(menuItems);
-
+            int petId;
             while (selection != 5) {
                 switch (selection) {
                     case 1://   LIST ALL
@@ -48,10 +48,17 @@ namespace PetShop.UI.ConsoleApp {
                         _petService.Create(pet);
                         break;
                     case 3://   DELETE
-                        Console.WriteLine("case 2: Delete Pet");
+                        petId = GetPetIdFromUser();
+                        var petToDelete = _petService.FindPetById(petId);
+
+                        Console.WriteLine("Deleting {0}, type YES to confirm: ", petToDelete.Name);
+                        if (Console.ReadLine() == "YES") {
+                            _petService.Delete(petToDelete);
+                        }
+                        
                         break;
                     case 4://   UPDATE
-                        int petId = GetPetIdFromUser();
+                        petId = GetPetIdFromUser();
                         var petToUpdate = _petService.FindPetById(petId);
                         Console.WriteLine("Updating " + petToUpdate.Name);
                         var newName = ReadUserData("name: ");

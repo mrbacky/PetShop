@@ -17,6 +17,10 @@ namespace PetShop.Core.ApplicationService.Concrete {
             return _petRepo.Create(pet);
         }
 
+        public void Delete(Pet pet) {
+            _petRepo.Delete(pet);
+        }
+
         public Pet FindPetById(int id) {
             return _petRepo.ReadById(id);
         }

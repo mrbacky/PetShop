@@ -12,6 +12,8 @@ namespace PetShop.Core.DomainService {
         Pet UpdateInDB(Pet pet);
 
         Pet ReadById(int id);
+
+        void Delete(Pet pet);
        
     }
 }

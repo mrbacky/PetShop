@@ -54,5 +54,7 @@ namespace PetShop.Infrastructure.Static.Data {
         public List<Pet> GetPriceList() {
             return _pets.OrderBy(x => x.Price).ToList();
         }
+
+        
     }
 }

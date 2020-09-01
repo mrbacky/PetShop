@@ -15,6 +15,7 @@ namespace PetShop.Core.DomainService {
 
         void Delete(Pet pet);
         List<Pet> FilterPetByType(string type);
+
         List<Pet> GetPriceList();
     }
 }

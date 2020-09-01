@@ -29,6 +29,8 @@ namespace PetShop.Core.ApplicationService.Concrete {
             return _petRepo.ReadById(id);
         }
 
+        
+
         public List<Pet> GetSortedList() {
             return _petRepo.GetPriceList();
         }

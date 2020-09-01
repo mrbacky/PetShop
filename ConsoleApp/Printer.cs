@@ -26,10 +26,11 @@ namespace PetShop.UI.ConsoleApp {
                 "Delete Pet",
                 "Update Pet",
                 "Sort Pets by price",
+                "List 5 cheapest pets",
                 "Exit"
             };
             var selection = ShowMenu(menuItems);
-            while (selection != 7) {
+            while (selection != 9) {
                 switch (selection) {
                     case 1:
                         ListAllPets();
@@ -56,6 +57,10 @@ namespace PetShop.UI.ConsoleApp {
                         GetPetsSortedByPrice();
                         Console.WriteLine();
                         break;
+                    case 7:
+                        List5CheapestPets();
+                        Console.WriteLine();
+                        break;
                 }
                 selection = ShowMenu(menuItems);
             }
@@ -65,11 +70,23 @@ namespace PetShop.UI.ConsoleApp {
             Console.ReadLine();
         }
 
-        private void GetPetsSortedByPrice() {
+        private void List5CheapestPets() {
+            List<Pet> pets = _petService.GetSortedList();
+            int counter = 0;
+            foreach (var item in pets) {
+                if (counter < 5) {
+                    Console.WriteLine($"{item.Price} {item.Name}");
+                    counter++;
+                }
+            }
+        }
+
+        private List<Pet> GetPetsSortedByPrice() {
             List<Pet> pets = _petService.GetSortedList();
             foreach (var item in pets) {
                 Console.WriteLine($"{item.Name} {item.Price}");
             }
+            return pets;
         }
 
         private void UpdatePet() {
@@ -189,8 +206,8 @@ namespace PetShop.UI.ConsoleApp {
             Console.WriteLine();
             Console.Write("$ ");
             int selection;
-            while (!int.TryParse(Console.ReadLine(), out selection) || selection < 1 || selection > 8) {
-                Console.Write("$ Please select a number between 1-5: ");
+            while (!int.TryParse(Console.ReadLine(), out selection) || selection < 1 || selection > 9) {
+                Console.Write("$ Please select a number between 1-8: ");
             }
             Console.WriteLine();
             return selection;

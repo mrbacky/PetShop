@@ -44,8 +44,35 @@ namespace PetShop.Infrastructure.Static.Data {
             };
             _petService.Create(pet3);
 
+            Pet pet4 = new Pet {
+                Name = "Travis",
+                Type = "Cat",
+                Birthdate = new DateTime(2020, 6, 7),
+                SoldDate = new DateTime(2020, 8, 1),
+                Owner = "PetShopEsbjerg",
+                Price = 32541,
+            };
+            _petService.Create(pet4);
 
+            Pet pet5 = new Pet {
+                Name = "Vincent",
+                Type = "Dog",
+                Birthdate = new DateTime(2020, 6, 7),
+                SoldDate = new DateTime(2020, 8, 1),
+                Owner = "John Wick",
+                Price = 9711254,
+            };
+            _petService.Create(pet5);
 
+            Pet pet6 = new Pet {
+                Name = "Stewart",
+                Type = "Mouse",
+                Birthdate = new DateTime(2020, 6, 7),
+                SoldDate = new DateTime(2020, 8, 1),
+                Owner = "Carl Johnson",
+                Price = 7471,
+            };
+            _petService.Create(pet6);
         }
 
 

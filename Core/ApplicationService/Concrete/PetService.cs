@@ -29,6 +29,10 @@ namespace PetShop.Core.ApplicationService.Concrete {
             return _petRepo.ReadById(id);
         }
 
+        public List<Pet> GetSortedList() {
+            return _petRepo.GetPriceList();
+        }
+
         public Pet NewPet(string name, string type, DateTime birthday, DateTime soldDate, string owner, double price) {
             var newPet = new Pet() {
                 Name = name,

@@ -50,5 +50,9 @@ namespace PetShop.Infrastructure.Static.Data {
         public List<Pet> FilterPetByType(string type) {
             return _pets.Where(x => x.Type == type).ToList();
         }
+
+        public List<Pet> GetPriceList() {
+            return _pets.OrderBy(x => x.Price).ToList();
+        }
     }
 }

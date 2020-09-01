@@ -20,5 +20,6 @@ namespace PetShop.Core.Entities {
 
         void Delete(Pet pet);
         List<Pet> FilterPetByType(string type);
+        List<Pet> GetSortedList();
     }
 }

@@ -102,8 +102,8 @@ namespace PetShop.UI.ConsoleApp {
             var newOwner = ReadUserData("$ Owner: ");
             Console.Write("$ Price: ");
             double newPrice = GetPriceFromUser();
-
-            //  asign new values to object
+             
+            //  asign new values to object ----- MOVE THIS 
             petToUpdate.Name = newName;
             petToUpdate.Type = newType;
             petToUpdate.Birthdate = newBirthday;

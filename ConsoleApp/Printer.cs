@@ -9,7 +9,7 @@ namespace PetShop.UI.ConsoleApp {
     public class Printer : IPrinter {
 
         IPetService _petService;
-        int petId;
+        int _petId;
 
 
         public Printer(IPetService petService) {
@@ -90,9 +90,9 @@ namespace PetShop.UI.ConsoleApp {
         }
 
         private void UpdatePet() {
-            petId = GetPetIdFromUser();
-            var petToUpdate = _petService.FindPetById(petId);
-            Console.WriteLine("Updating " + petToUpdate.Name);
+            _petId = GetPetIdFromUser();
+            var pet = _petService.FindPetById(_petId);
+            Console.WriteLine("Updating " + pet.Name);
             var newName = ReadUserData("$ Name: ");
             var newType = ReadUserData("$ Type: ");
             Console.Write("$ Birth date:");
@@ -102,21 +102,21 @@ namespace PetShop.UI.ConsoleApp {
             var newOwner = ReadUserData("$ Owner: ");
             Console.Write("$ Price: ");
             double newPrice = GetPriceFromUser();
-             
-            //  asign new values to object ----- MOVE THIS 
-            petToUpdate.Name = newName;
-            petToUpdate.Type = newType;
-            petToUpdate.Birthdate = newBirthday;
-            petToUpdate.SoldDate = newSoldDate;
-            petToUpdate.Owner = newOwner;
-            petToUpdate.Price = newPrice;
-
-            _petService.Update(petToUpdate);
+            
+            _petService.Update(new Pet {
+                Id = _petId,
+                Name = newName,
+                Type = newType,
+                Birthdate = newBirthday,
+                SoldDate = newSoldDate,
+                Owner = newOwner,
+                Price = newPrice
+            });
         }
 
         private void DeletePet() {
-            petId = GetPetIdFromUser();
-            var petToDelete = _petService.FindPetById(petId);
+            _petId = GetPetIdFromUser();
+            var petToDelete = _petService.FindPetById(_petId);
             Console.Write("$ Deleting {0}, type YES to confirm: ", petToDelete.Name);
             if (Console.ReadLine() == "YES") {
                 _petService.Delete(petToDelete);

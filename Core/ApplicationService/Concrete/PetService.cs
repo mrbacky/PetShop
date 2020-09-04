@@ -22,14 +22,14 @@ namespace PetShop.Core.ApplicationService.Concrete {
         }
 
         public List<Pet> FilterPetByType(string type) {
-           return _petRepo.FilterPetByType(type);
+            return _petRepo.FilterPetByType(type);
         }
 
         public Pet FindPetById(int id) {
             return _petRepo.ReadById(id);
         }
 
-        
+
 
         public List<Pet> GetSortedList() {
             return _petRepo.GetPriceList();
@@ -51,17 +51,8 @@ namespace PetShop.Core.ApplicationService.Concrete {
             return _petRepo.ReadPets();
         }
 
-        public Pet Update(Pet petToUpdate) {
-
-            Pet pet = FindPetById(petToUpdate.Id);
-            pet.Name = petToUpdate.Name;
-            /*pet.PreviousOwner = petToUpdate.PreviousOwner;
-            pet.Type = petToUpdate.Type;
-            pet.Price = petToUpdate.Price;
-            pet.SoldDate = petToUpdate.SoldDate;
-            pet.Birthdate = petToUpdate.Birthdate;*/
-
-            return _petRepo.UpdateInDB(pet);
+        public Pet Update(Pet updatedPet) {
+            return _petRepo.UpdateInDB(updatedPet);
         }
     }
 

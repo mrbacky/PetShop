@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PetShop.Core.DomainService {
     public interface IPetRepositary {
+
         List<Pet> ReadPets();
 
         Pet Create(Pet petToCreate);

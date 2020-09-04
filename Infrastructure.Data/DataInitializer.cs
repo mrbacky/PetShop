@@ -1,4 +1,5 @@
-﻿using PetShop.Core.DomainService;
+﻿using PetShop.Core.ApplicationService;
+using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,26 @@ using System.Text;
 namespace PetShop.Infrastructure.Static.Data {
     public class DataInitializer {
         readonly IPetService _petService;
+        readonly IOwnerService _ownerService;
 
-        public DataInitializer(IPetService petService) {
+        public DataInitializer(IPetService petService, IOwnerService ownerService) {
             _petService = petService;
+            _ownerService = ownerService;
         }
 
-        public void InitData() {
+        /*public void initOwners() {
+            Owner owner1 = new Owner {
+                FirstName = "Mike",
+                LastName = "Ehrmanthraut",
+                Address = "New Mexico 4",
+                PhoneNumber = "+45845452",
+                Email = "mike7@gmail.com"
+            };
+
+            _ownerService.Create(owner1);
+        }*/
+
+        public void initPets() {
 
             Pet pet1 = new Pet {
                 Name = "Molly",

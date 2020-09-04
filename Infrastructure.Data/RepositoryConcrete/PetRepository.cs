@@ -8,7 +8,7 @@ namespace PetShop.Infrastructure.Static.Data {
     public class PetRepository : IPetRepositary {
 
         static int id = 1;
-        private List<Pet> _pets = new List<Pet>();
+        static List<Pet> _pets = new List<Pet>();
 
         public Pet Create(Pet pet) {
             pet.Id = id++;
@@ -29,15 +29,15 @@ namespace PetShop.Infrastructure.Static.Data {
             return null;
         }
 
-        public Pet UpdateInDB(Pet petToUpdate) {
-            var petFromDB = this.ReadById(petToUpdate.Id);
+        public Pet UpdateInDB(Pet updatedPet) {
+            var petFromDB = ReadById(updatedPet.Id);
             if (petFromDB != null) {
-                petFromDB.Name = petToUpdate.Name;
-                /*petFromDB.PreviousOwner = petToUpdate.PreviousOwner;
-                petFromDB.Type = petToUpdate.Type;
-                petFromDB.Price = petToUpdate.Price;
-                petFromDB.SoldDate = petToUpdate.SoldDate;
-                petFromDB.Birthdate = petToUpdate.Birthdate;*/
+                petFromDB.Name = updatedPet.Name;
+                petFromDB.Owner = updatedPet.Owner;
+                petFromDB.Type = updatedPet.Type;
+                petFromDB.Price = updatedPet.Price;
+                petFromDB.SoldDate = updatedPet.SoldDate;
+                petFromDB.Birthdate = updatedPet.Birthdate;
                 return petFromDB;
             }
             return null;
@@ -55,6 +55,6 @@ namespace PetShop.Infrastructure.Static.Data {
             return _pets.OrderBy(x => x.Price).ToList();
         }
 
-        
+
     }
 }
